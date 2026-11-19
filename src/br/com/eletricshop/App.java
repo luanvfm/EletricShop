@@ -6,6 +6,6 @@ public class App {
         System.out.println(iphoneX.preco_a_vista());
 
         Computador macintosh = new Computador("Macintosh", 10000.00f, "Mockup config for macintosh");
-        System.out.println("O preço a vista do Macintosh é: " + macintosh.preco_a_vista() + "\nCom desconto de: " + macintosh.getDesconto() + "E seu código é: " + macintosh.getCodigo());
+        System.out.println("O preço a vista do Macintosh é: " + macintosh.preco_a_vista() + "\nCom desconto de: " + macintosh.getDesconto() + "\nE seu código é: " + macintosh.getCodigo());
     }
 }
