@@ -56,4 +56,21 @@ public class Carrinho {
          
     }
 
+    public void cadastrar(Mercadoria m){
+        if(m == null) {
+            throw new IllegalArgumentException("Mercadoria Inserida é nula: " + m);
+        }
+        if(conjuntoMercadorias.size() < 100) {
+            conjuntoMercadorias.addLast(m);
+        } else {
+            throw new IndexOutOfBoundsException("O limite do conjunto de mercadorias no carrinho é 100: " + conjuntoMercadorias);
+        }
+    }
+
+    public void remover(Mercadoria m) {
+        for(m : conjuntoMercadorias) {
+
+        }
+    }
+
 }
