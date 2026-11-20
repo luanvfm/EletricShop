@@ -6,39 +6,40 @@ public class Carrinho {
     private static Integer proximoCodigo = 1;
     private String nomeCliente;
     private ArrayList<Mercadoria> conjuntoMercadorias;
+    private Integer limiteDoCarrinho = 100;
 
     public Carrinho(String nomeCliente, ArrayList<Mercadoria> mercadorias){
         this.codigoCliente = proximoCodigo;
         proximoCodigo++;
-        this.nomeCliente = nomeCliente;
-        this.conjuntoMercadorias = mercadorias;
+        setNomeCliente(nomeCliente);
+        setConjuntoMercadorias(mercadorias);
     }
     // Getters e Setters
-    public Integer getCodigoCliente(){
+    public final Integer getCodigoCliente(){
         return this.codigoCliente;
     }
     
-    public String getNomeCliente(){
+    public final String getNomeCliente(){
         return this.nomeCliente;
     }
-    public void setNomeCliente(String nome){
+    public final void setNomeCliente(String nome){
         this.nomeCliente = nome;
     }
 
-    public ArrayList<Mercadoria> getConjuntoMercadorias() {
+    public final ArrayList<Mercadoria> getConjuntoMercadorias() {
         return conjuntoMercadorias;
     }
-    public void setConjuntoMercadorias(ArrayList<Mercadoria> conjuntoMercadorias) {
+    public final void setConjuntoMercadorias(ArrayList<Mercadoria> conjuntoMercadorias) {
         this.conjuntoMercadorias = conjuntoMercadorias;
     }
     // Fim dos Getters e Setters
 
     public Mercadoria procurar(Integer codigo) {
         if (codigo == null) {
-            throw new IllegalArgumentException("Codigo do Cliente não pode ser nulo: " + codigo);
+            throw new IllegalArgumentException("Codigo da Mercadoria não pode ser nulo: " + codigo);
         }
         if (codigo < 0) {
-            throw new IllegalArgumentException("Codigo do cliente não pode ser negativo: " + codigo);
+            throw new IllegalArgumentException("Codigo da Mercadoria não pode ser negativo: " + codigo);
         }
         // Percorre a lista de Mercadorias
         if (conjuntoMercadorias != null && conjuntoMercadorias.size() != 0) {
@@ -60,17 +61,39 @@ public class Carrinho {
         if(m == null) {
             throw new IllegalArgumentException("Mercadoria Inserida é nula: " + m);
         }
-        if(conjuntoMercadorias.size() < 100) {
-            conjuntoMercadorias.addLast(m);
+        if(conjuntoMercadorias.size() < limiteDoCarrinho) {
+            conjuntoMercadorias.add(m);
         } else {
             throw new IndexOutOfBoundsException("O limite do conjunto de mercadorias no carrinho é 100: " + conjuntoMercadorias);
         }
     }
 
     public void remover(Mercadoria m) {
-        for(m : conjuntoMercadorias) {
-
+        if (m == null) {
+            throw new IllegalArgumentException("A mercadoria não pode ser nula: " + m);
         }
+        for(Mercadoria mercadoriatemp : conjuntoMercadorias) {
+            if (mercadoriatemp.equals(m)) {
+                conjuntoMercadorias.remove(m);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("A mercadoria não pôde ser encontrada: " + m);
     }
 
+    public void conteudo(){
+        // Soma todos os valores
+        Float valorTotal = 0f;
+        for (int i = 0; i < conjuntoMercadorias.size(); i ++) {
+            valorTotal = valorTotal + conjuntoMercadorias.get(i).getPreco();
+        } 
+        // Impressão
+        for(int i = 0; i < conjuntoMercadorias.size(); i++) {
+            System.out.println("Codigo da Mercadoria: " + conjuntoMercadorias.get(i).getCodigo() + "\n");
+            System.out.println("Nome da Mercadoria: " + conjuntoMercadorias.get(i).getNome() + "\n");
+            System.out.println("Preço da Mercadoria: " + conjuntoMercadorias.get(i).getPreco() + "\n");
+        }
+        System.out.println("\nTotal de Mercadorias: " + conjuntoMercadorias.size() + "\n");
+        System.out.println("Valor total das mercadorias é: " + valorTotal + "\n");
+    }
 }
