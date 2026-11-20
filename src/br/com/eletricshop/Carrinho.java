@@ -23,6 +23,13 @@ public class Carrinho {
         return this.nomeCliente;
     }
     public final void setNomeCliente(String nome){
+        if(nome == null) {
+            throw new IllegalArgumentException("Nome não pode ser nulo: " + nome);
+        }
+
+        if (nome.isEmpty() || nome.isBlank()) {
+            throw new IllegalArgumentException("O nome preenchido está vazio: " + nome);
+        }
         this.nomeCliente = nome;
     }
 
