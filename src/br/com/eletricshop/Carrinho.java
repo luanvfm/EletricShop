@@ -6,13 +6,13 @@ public class Carrinho {
     private static Integer proximoCodigo = 1;
     private String nomeCliente;
     private ArrayList<Mercadoria> conjuntoMercadorias;
-    private Integer limiteDoCarrinho = 100;
+    private static final Integer limiteDoCarrinho = 100;
 
-    public Carrinho(String nomeCliente, ArrayList<Mercadoria> mercadorias){
+    public Carrinho(String nomeCliente){
         this.codigoCliente = proximoCodigo;
         proximoCodigo++;
         setNomeCliente(nomeCliente);
-        setConjuntoMercadorias(mercadorias);
+        conjuntoMercadorias = new ArrayList<>();
     }
     // Getters e Setters
     public final Integer getCodigoCliente(){
@@ -36,9 +36,11 @@ public class Carrinho {
     public final ArrayList<Mercadoria> getConjuntoMercadorias() {
         return conjuntoMercadorias;
     }
-    public final void setConjuntoMercadorias(ArrayList<Mercadoria> conjuntoMercadorias) {
-        this.conjuntoMercadorias = conjuntoMercadorias;
-    }
+    //Codigo morto
+    // public final void setConjuntoMercadorias(ArrayList<Mercadoria> conjuntoMercadorias) {
+    //     this.conjuntoMercadorias = conjuntoMercadorias;
+    // }
+
     // Fim dos Getters e Setters
 
     public Mercadoria procurar(Integer codigo) {
@@ -71,7 +73,7 @@ public class Carrinho {
         if(conjuntoMercadorias.size() < limiteDoCarrinho) {
             conjuntoMercadorias.add(m);
         } else {
-            throw new IndexOutOfBoundsException("O limite do conjunto de mercadorias no carrinho é 100: " + conjuntoMercadorias);
+            throw new IndexOutOfBoundsException("O limite do conjunto de mercadorias no carrinho esta fora do escopo: " + conjuntoMercadorias + "\n Limite é: " + limiteDoCarrinho);
         }
     }
 

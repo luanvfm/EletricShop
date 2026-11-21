@@ -7,5 +7,19 @@ public class App {
 
         Computador macintosh = new Computador("Macintosh", 10000.00f, "Mockup config for macintosh");
         System.out.println("O preço a vista do Macintosh é: " + macintosh.preco_a_vista() + "\nCom desconto de: " + macintosh.getDesconto() + "\nE seu código é: " + macintosh.getCodigo());
+
+        Carrinho novoCarrinho = new Carrinho("Luquinhas");
+
+        novoCarrinho.cadastrar(macintosh);
+        novoCarrinho.cadastrar(iphoneX);
+
+        novoCarrinho.conteudo();
+
+        novoCarrinho.remover(macintosh);
+
+        novoCarrinho.conteudo();
+
+
+
     }
 }
